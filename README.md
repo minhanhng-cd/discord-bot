@@ -6,7 +6,7 @@ Useful links:
 - [Quick Tutorial](https://realpython.com/how-to-make-a-discord-bot-python/)
 - [Documentation](https://discordpy.readthedocs.io/en/latest/)
 
-## Setup
+## 1. Setup
 
 1. Clone this repo
 
@@ -41,7 +41,16 @@ Hit the key `I` then paste the DISCORD_TOKEN and DISCORD_GUILD. Then hit `Esc`, 
 python uku.py
 ```
 
-## Submit your work
+#### For Google Sheet API
+1. Download the file `credentials.json` in Google Drive folder `Discord Bot` and save it to the project folder `discort-bot`
+2. Make sure that the `.env` file contains STUDENT_SCORING.
+3. Run the script
+It should print out the name of students in our class, their score and rank. The gsheet file is in `Discord Bot` folder, called `Test Date - Student Scoring`.
+```
+python gsheet.py
+```
+
+## 2. Submit your work
 You should make changes/add new features to the projects in a seperate branch
 ```
 git checkout -b <branch-name>
