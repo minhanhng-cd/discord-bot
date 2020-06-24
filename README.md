@@ -40,3 +40,45 @@ Hit the key `I` then paste the DISCORD_TOKEN and DISCORD_GUILD. Then hit `Esc`, 
 ```
 python uku.py
 ```
+
+## Submit your work
+You should make changes/add new features to the projects in a seperate branch
+```
+git checkout -b <branch-name>
+```
+E.g. 
+```
+git checkout -b tom
+```
+
+Once you finish your work,
+1. Get the latest update from `origin/master` branch
+```
+git pull origin master
+```
+2. Stage all changes
+```
+git add .
+```
+3. Commit your changes
+```
+git commit -m <commit-message>
+```
+E.g.
+```
+git commit - m "Fix bugs"
+```
+4. Push your branch to origin
+```
+git push origin <branch-name>
+```
+E.g.
+```  
+git push origin tom
+```
+Note: Do not push directly to `origin/master`
+
+5. Create a pull request
+Go to this Github > Pull requests > New pull request
+
+6. Ask me to merge your changes with `origin/master`
