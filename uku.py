@@ -13,9 +13,20 @@ client = discord.Client()
 
 # ----COMMANDS----
 
-# Command: Get content of .env file
+# Command: Show available commands
+def help(message):
+    response = """Here are what Uku can do!
+    - `help`: Show available commands
+    - `config`: Show configuration settings (Only work in development server)
+    - `links`: Display important class links
+    - `cheers`: Give you a random cheer-up!
+    """
+    return response
 
+# Command: Get content of .env file
 def config(message):
+
+    # Only work in development server
     if message.guild.name != "Uku & Lele's Servants":
         return
 
@@ -61,8 +72,11 @@ async def on_message(message):
     if 'Uku' in [u.name for u in message.mentions]:
         command = message.content.split()[-1]
         response = eval(command + '(message)')
+
+        # Break if reponse is empty
         if not response:
             return
+
         await message.channel.send(response)
 
 client.run(TOKEN)
