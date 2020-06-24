@@ -13,8 +13,18 @@ client = discord.Client()
 
 # ----COMMANDS----
 
+# Command: Get content of .env file
+
+def config(message):
+    if message.guild.name != "Uku & Lele's Servants":
+        return
+
+    with open('.env','r') as f:
+        response = f.read()
+    return response
+
 # Command: Send important links
-def links():
+def links(message):
     response = """Here are some useful links! Meowww
     - Learning Portal: <http://learning.coderschool.vn/courses/ftmle_philippines/unit/1#!module>
     - Google Drive: <https://drive.google.com/drive/folders/1rRz0c0gwAAdkQIz7eRlJoMbbCeDADSTE>
@@ -24,7 +34,7 @@ def links():
     return response
 
 # Command: Cheer up
-def cheers():
+def cheers(message):
     with open('cheers.txt','r') as f:
         cheers = [line for line in f]
     return random.choice(cheers)
@@ -50,7 +60,9 @@ async def on_message(message):
     # Check if bot name is mentioned
     if 'Uku' in [u.name for u in message.mentions]:
         command = message.content.split()[-1]
-        response = eval(command + '()')
+        response = eval(command + '(message)')
+        if not response:
+            return
         await message.channel.send(response)
 
 client.run(TOKEN)
