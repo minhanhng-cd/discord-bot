@@ -1,26 +1,45 @@
 import os
+from datetime import datetime 
 from dotenv import load_dotenv
 from oauth2client.service_account import ServiceAccountCredentials
 from googleapiclient.discovery import build
+import pandas as pd
+import numpy as np
 
 load_dotenv()
 
 SCOPES = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-SPREADSHEET_ID = os.getenv('STUDENT_SCORING')
+SPREADSHEET_ID = os.getenv('COHORT_METADATA')
 creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', SCOPES)
 
 service = build('sheets', 'v4', credentials = creds)
 
-def get_scores():
+def get_users():
     data = service.spreadsheets().values().get(
       spreadsheetId = SPREADSHEET_ID,
-      range = 'Summary!D:G').execute()
+      range = 'misc!A:B').execute()
+    # values = list(data['values'][1:])
+
+    # users = {x[1]: x[0] for x in values}
+    
+    return data['values']
+
+def get_keys():
+    data = service.spreadsheets().values().get(
+      spreadsheetId = SPREADSHEET_ID,
+      range = 'Log!A:D').execute()
     values = list(data['values'][1:])
-    names = [x[0] for x in values]
-    scores = [int(x[1]) for x in values]
-    ranks = [x[2] for x in values]
-    week = int(values[1][3])
 
-    return (names, scores, ranks, week)
+    keys = [x[0] + x[1] + x[3] for x in values]
 
-print(get_scores())
+    return keys
+
+data = np.array(service.spreadsheets().values().get(
+      spreadsheetId = SPREADSHEET_ID,
+      range = 'metadata!A:M').execute()['values'])
+
+print(pd.DataFrame(data[1:, :], columns = data[0,:]))
+
+# print(pd.DataFrame(get_users(), columns = ['name','username']))
+# print(datetime.strftime(datetime.now().date(), '%Y-%m-%d'))
+# print(datetime.strptime(date[-1], '%Y-%m-%d').date())
