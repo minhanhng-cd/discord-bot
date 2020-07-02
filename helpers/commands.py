@@ -63,12 +63,11 @@ def hello(message, channel):
     else:
         spreadsheetId = spreadsheetId[0]
 
-    # Get list of users and their Disord account
-    users = gsheet.get_users(spreadsheetId)
-
     today = datetime.strftime(datetime.now().date(), '%Y-%m-%d')
 
     try:
+        # Get list of users and their Disord account
+        users = gsheet.get_users(spreadsheetId)
         user = users[message.author.name]
     except:
         return {'content': f'Student {message.author.name} not found!'}

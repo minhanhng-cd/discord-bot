@@ -18,9 +18,6 @@ def get_users():
     data = service.spreadsheets().values().get(
       spreadsheetId = SPREADSHEET_ID,
       range = 'misc!A:B').execute()
-    # values = list(data['values'][1:])
-
-    # users = {x[1]: x[0] for x in values}
     
     return data['values']
 
