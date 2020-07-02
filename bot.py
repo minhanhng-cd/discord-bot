@@ -8,6 +8,7 @@ from helpers.commands import *
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+BOT_NAME = os.getenv('BOT_NAME')
 
 client = discord.Client()
 
@@ -29,7 +30,7 @@ async def on_message(message):
         return
 
     # Check if bot name is mentioned
-    if 'Uku & Lele' in [u.name for u in message.mentions]:
+    if BOT_NAME in [u.name for u in message.mentions]:
         channel = message.channel.category.name
         command = message.content.split()[-1].lower()
 
@@ -47,7 +48,7 @@ async def on_message(message):
 
         if response == 'clear':
             for m in history:
-                if (m.author.name == 'Uku & Lele') or ('Uku & Lele' in [u.name for u in m.mentions]) or ('<@&727541182510399650>' in m.content) and ('order' not in m.content):
+                if (m.author.name == BOT_NAME) or (BOT_NAME in [u.name for u in m.mentions]) or ('<@&727541182510399650>' in m.content) and ('order' not in m.content):
                     try:
                         await m.delete()
                     except:
