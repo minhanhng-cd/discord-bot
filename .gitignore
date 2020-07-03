@@ -1,3 +1,7 @@
 discord
+discord-bot
 .env
 credentials.json
+test.py
+models/*
+attachment.jpg

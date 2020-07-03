@@ -3,6 +3,35 @@ import random
 from datetime import datetime 
 from helpers import gsheet
 import numpy as np
+import tensorflow as tf
+import requests
+
+model = tf.keras.models.load_model('models/catdog.h5')
+
+# Preprocess an image
+def preprocess_image(image):
+    image = tf.image.decode_jpeg(image, channels=3)
+    image = tf.image.resize(image, [224, 224])
+    image /= 255.0  # normalize to [0,1] range
+
+    return image
+
+# Read the image from path and preprocess
+def load_and_preprocess_image(path):
+    image = tf.io.read_file(path)
+    return preprocess_image(image)
+
+# Predict & classify image
+def classify(model, image_path):
+
+    preprocessed_imgage = load_and_preprocess_image(image_path)
+    preprocessed_imgage = tf.reshape(preprocessed_imgage, (1,224 ,224 ,3))
+
+    prob = model.predict(preprocessed_imgage)
+    label = "Cat" if prob >= 0.5 else "Dog"
+    classified_prob = prob if prob >= 0.5 else 1 - prob
+    
+    return label, classified_prob
 
 # Command: Show available commands
 def help(message, channel):
@@ -93,3 +122,20 @@ def hello(message, channel):
 def clear(message, channel):
     return 'clear'
 
+def predict(message, channel):
+
+    url = message.attachments[0].url
+
+    r = requests.get(url)
+    with open('../attachment.jpg', 'wb') as file:
+        file.write(r.content)
+
+    pred, prob = classify(model, '../attachment.jpg')
+
+    message = f'Hi {message.author.name}! We are {round((prob[0][0] * 100), 2)}% sure that this is a {pred.upper()}!'
+    
+    embed = discord.Embed(title = message, color=0xd74742)
+    
+    embed.set_image(url = url)
+
+    return {'embed': embed}

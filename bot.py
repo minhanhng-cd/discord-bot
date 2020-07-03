@@ -4,6 +4,7 @@ import discord
 from dotenv import load_dotenv
 from helpers import gsheet 
 from helpers.commands import *
+import requests
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -60,5 +61,5 @@ async def on_message(message):
             return
 
         await message.channel.send(**response)
-
+        
 client.run(TOKEN)
