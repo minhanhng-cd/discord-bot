@@ -58,17 +58,20 @@ def config(message, channel):
 
 # Command: Send important links
 def links(message, channel):
-    embed = discord.Embed(title = "Here are some useful links!", color=0xd74742)
+
+    try:
+        embed = discord.Embed(title = "Here are some useful links!", color=0xd74742)
     
-    data = gsheet.get_metadata()
+        data = gsheet.get_metadata()
 
-    links = data[data['Channel'] == channel].iloc[:, 2:].replace('',np.nan).dropna(axis = 1).T.iloc[:,0].to_dict()
+        links = data[data['Channel'] == channel].iloc[:, 2:].replace('',np.nan).dropna(axis = 1).T.iloc[:,0].to_dict()
 
-    embed.set_image(url = 'https://i.imgur.com/ZmMo5ay.png')
+        embed.set_image(url = 'https://i.imgur.com/ZmMo5ay.png')
 
-    for name, value in links.items():
-        embed.add_field(name = name, value = value, inline = False)
-
+        for name, value in links.items():
+            embed.add_field(name = name, value = value, inline = False)
+    except Exception as err:
+        print(err)
     return {'embed': embed}
 
 # Command: Cheer up
@@ -124,18 +127,19 @@ def clear(message, channel):
 
 def predict(message, channel):
 
-    url = message.attachments[0].url
+    try:
+        url = message.attachments[0].url
+        r= requests.get(url)
+        with open('../attachment.jpg', 'wb') as file:
+            file.write(r.content)
 
-    r = requests.get(url)
-    with open('../attachment.jpg', 'wb') as file:
-        file.write(r.content)
+        with open('../attachment.jpg', 'rb') as file:
+            image = discord.File(file)
 
-    pred, prob = classify(model, '../attachment.jpg')
+        pred, prob = classify(model, '../attachment.jpg')
 
-    message = f'Hi {message.author.name}! We are {round((prob[0][0] * 100), 2)}% sure that this is a {pred.upper()}!'
+        message = f'Hi **{message.author.name}**! We are **{round((prob[0][0] * 100), 2)}%** sure that this is a **{pred.upper()}**!'
     
-    embed = discord.Embed(title = message, color=0xd74742)
-    
-    embed.set_image(url = url)
-
-    return {'embed': embed}
+    except Exception as err:
+        print(err)
+    return {'content':message, 'file':image}

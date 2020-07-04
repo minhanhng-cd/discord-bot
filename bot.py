@@ -59,7 +59,7 @@ async def on_message(message):
         # Break if reponse is empty
         if not response:
             return
-
+        print(response)
         await message.channel.send(**response)
         
 client.run(TOKEN)

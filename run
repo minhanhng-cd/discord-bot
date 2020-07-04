@@ -1,0 +1,4 @@
+kill $(ps ax | grep bot.py | head -n 1 | awk '{print $1}')
+git pull
+chmod +x ./bot.py
+nohup stdbuf -oL ./bot.py > log.out &
