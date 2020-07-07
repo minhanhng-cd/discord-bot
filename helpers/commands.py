@@ -35,7 +35,7 @@ def classify(model, image_path):
 
 # Command: Show available commands
 def help(message, channel):
-    response = """Here are what Uku can do!
+    response = """Here are what Uku & Lele can do!
     - `cheers`: Give you a random cheer-up!
     - `clear`: Clear recent messages sent by Uku & Lele
     - `hello`/`hi`/`heya`/`helu`/`hey`/`here`: Check-in!
@@ -181,7 +181,7 @@ def missing(message, channel):
         if count == 0:
             message = "Everybody is here! Meoww"
         else:
-            message = f"We are missing {count} students:\n"
+            message = f"We are missing {count} student(s):\n"
 
             for s in missing:
                 message += f"- {s}\n"

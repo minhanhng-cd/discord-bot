@@ -1,22 +1,10 @@
-2020-07-03 16:55:26.114051: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
-2020-07-03 16:55:26.114126: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
-2020-07-03 16:55:26.114153: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (discord-bot): /proc/driver/nvidia/version does not exist
-2020-07-03 16:55:26.114436: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
-2020-07-03 16:55:26.122894: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2200000000 Hz
-2020-07-03 16:55:26.123074: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f8e7c000b20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
-2020-07-03 16:55:26.123088: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
-Ignoring exception in on_message
-Traceback (most recent call last):
-  File "/home/minhanh_coderschool/discord-bot/discord-bot/lib/python3.7/site-packages/discord/client.py", line 312, in _run_event
-    await coro(*args, **kwargs)
-  File "./bot.py", line 48, in on_message
-    await message.delete()
-  File "/home/minhanh_coderschool/discord-bot/discord-bot/lib/python3.7/site-packages/discord/message.py", line 762, in delete
-    await self._state.http.delete_message(self.channel.id, self.id)
-  File "/home/minhanh_coderschool/discord-bot/discord-bot/lib/python3.7/site-packages/discord/http.py", line 223, in request
-    raise NotFound(r, data)
-discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
+2020-07-07 05:19:52.392827: W tensorflow/stream_executor/platform/default/dso_loader.cc:55] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2020-07-07 05:19:52.392902: E tensorflow/stream_executor/cuda/cuda_driver.cc:313] failed call to cuInit: UNKNOWN ERROR (303)
+2020-07-07 05:19:52.392930: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (discord-bot): /proc/driver/nvidia/version does not exist
+2020-07-07 05:19:52.393162: I tensorflow/core/platform/cpu_feature_guard.cc:143] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+2020-07-07 05:19:52.401240: I tensorflow/core/platform/profile_utils/cpu_utils.cc:102] CPU Frequency: 2200000000 Hz
+2020-07-07 05:19:52.401415: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x7f31b8000b20 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-07-07 05:19:52.401428: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
 Uku & Lele#8134 is connected to the following guild:
 CoderSchool(id: 542666886899302400)
-list index out of range
-list index out of range
+{'content': 'Here are what Uku & Lele can do!\n    - `cheers`: Give you a random cheer-up!\n    - `clear`: Clear recent messages sent by Uku & Lele\n    - `hello`/`hi`/`heya`/`helu`/`hey`/`here`: Check-in!\n    - `config`: Show configuration settings (Only work in development server)\n    - `help`: Show available commands\n    - `links`: Display important class links\n    - `missing`: Show missing students\n    - `predict`: Predict a cat/dog image (Attach a cat/dog image to the message)\n    '}
