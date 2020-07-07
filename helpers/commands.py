@@ -42,6 +42,8 @@ def help(message, channel):
     - `config`: Show configuration settings (Only work in development server)
     - `help`: Show available commands
     - `links`: Display important class links
+    - `missing`: Show missing students
+    - `predict`: Predict a cat/dog image (Attach a cat/dog image to the message)
     """
     return {'content': response}
 
@@ -122,9 +124,11 @@ def hello(message, channel):
 
     return {'content': f'{random.choice(welcome)}, {user}!'}
 
+# Command: Clear all messages sent by bot
 def clear(message, channel):
     return 'clear'
 
+# Command: Predict an cat/dog image
 def predict(message, channel):
 
     try:
@@ -143,3 +147,46 @@ def predict(message, channel):
     except Exception as err:
         print(err)
     return {'content':message, 'file':image}
+
+# Command: Show missing students
+def missing(message, channel):
+    try:
+        # Get channel_id from metadata
+        metadata = gsheet.get_metadata()
+        spreadsheetId = metadata[metadata['Channel'] == channel]['ID'].values
+
+        if len(spreadsheetId) == 0:
+            print(f'Channel {channel} not found')
+            return
+        else:
+            spreadsheetId = spreadsheetId[0]
+
+        # Get list of users and their Disord account
+        users = gsheet.get_users(spreadsheetId)
+
+        today = datetime.strftime(datetime.now().date(), '%Y-%m-%d')
+
+        log = gsheet.get_keys(spreadsheetId)
+
+        count = 0
+        missing = []
+
+        for user in users.values():
+            key = today + user + 'Attendance'
+            
+            if key not in log:
+                count += 1
+                missing.append(user)
+
+        if count == 0:
+            message = "Everybody is here! Meoww"
+        else:
+            message = f"We are missing {count} students:\n"
+
+            for s in missing:
+                message += f"- {s}\n"
+
+    except Exception as err:
+        print(err)
+
+    return {'content': message}
