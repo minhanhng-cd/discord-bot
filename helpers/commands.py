@@ -6,7 +6,7 @@ import numpy as np
 import tensorflow as tf
 import requests
 
-model = tf.keras.models.load_model('models/catdog.h5')
+# model = tf.keras.models.load_model('models/catdog.h5')
 
 # Preprocess an image
 def preprocess_image(image):
@@ -129,24 +129,24 @@ def clear(message, channel):
     return 'clear'
 
 # Command: Predict an cat/dog image
-def predict(message, channel):
+#def predict(message, channel):
 
-    try:
-        url = message.attachments[0].url
-        r= requests.get(url)
-        with open('../attachment.jpg', 'wb') as file:
-            file.write(r.content)
+ #   try:
+  #      url = message.attachments[0].url
+   #     r= requests.get(url)
+    #    with open('../attachment.jpg', 'wb') as file:
+     #       file.write(r.content)
 
-        with open('../attachment.jpg', 'rb') as file:
-            image = discord.File(file)
+     #   with open('../attachment.jpg', 'rb') as file:
+      #      image = discord.File(file)
 
-        pred, prob = classify(model, '../attachment.jpg')
+       # pred, prob = classify(model, '../attachment.jpg')
 
-        message = f'Hi **{message.author.name}**! We are **{round((prob[0][0] * 100), 2)}%** sure that this is a **{pred.upper()}**!'
+        #message = f'Hi **{message.author.name}**! We are **{round((prob[0][0] * 100), 2)}%** sure that this is a **{pred.upper()}**!'
     
-    except Exception as err:
-        print(err)
-    return {'content':message, 'file':image}
+    #except Exception as err:
+     #   print(err)
+    #return {'content':message, 'file':image}
 
 # Command: Show missing students
 def missing(message, channel):
