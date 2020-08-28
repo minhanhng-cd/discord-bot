@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import os
+from datetime import datetime, timedelta
 import discord
+from discord.ext import tasks
 from dotenv import load_dotenv
 from helpers import gsheet 
 from helpers.commands import *
@@ -33,7 +35,7 @@ async def on_message(message):
     # Check if bot name is mentioned
     if BOT_NAME in [u.name for u in message.mentions]:
         channel = message.channel.category.name
-        command = message.content.split()[-1].lower()
+        command = message.content.split()[1].lower()
 
         if command in ['hi','hello','heya','helu','hey','here']:
             command = 'hello'
@@ -59,7 +61,6 @@ async def on_message(message):
         # Break if reponse is empty
         if not response:
             return
-        print(response)
         await message.channel.send(**response)
         
 client.run(TOKEN)

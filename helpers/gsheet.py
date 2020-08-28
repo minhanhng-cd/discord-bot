@@ -31,33 +31,48 @@ def get_metadata():
     df = pd.DataFrame(df_data)
     return df
 
-def get_users(spreadsheetId):
+def get_users(spreadsheetId, cohort=None):
     """
     Get students and their Discord name
-    Return: Name - Discord Name Dictionary
+    Return: Discord Name - StudentId Dictionary
     """
     data = service.spreadsheets().values().get(
         spreadsheetId = spreadsheetId,
-        range = 'misc!A:B').execute()['values']
-   
-    return {i[1]: i[0] for i in data}
+        range = 'Look_Up!A3:E').execute()['values']
+
+    if cohort:
+        return {i[3]: i[0] for i in data if (i[4] == 'Active') & (i[2] == cohort)}
+    else:
+        return {i[3]: i[0] for i in data if i[4] == 'Active'}
 
 def get_keys(spreadsheetId):
     """
-    Get students and their Discord name
+    Get students attendance unique keys
     Return: List of Keys
     """
     data = service.spreadsheets().values().get(
         spreadsheetId = spreadsheetId,
-        range = 'Log!A:D').execute()
+        range = 'Log!A:D').execute()['values']
 
-    values = list(data['values'][1:])
+    values = list(data[1:])
 
     keys = [x[0] + x[1] + x[3] for x in values]
 
     return keys
 
-def check_in(body, spreadsheetId):
+def get_activity(spreadsheetId):
+    """
+    Get list of scoring system activities
+    Return: List of activities
+    """
+    data = service.spreadsheets().values().get(
+        spreadsheetId = spreadsheetId,
+        range = 'Look_Up!S:S').execute()['values']
+    
+    return [activity[0] for activity in data[1:]]
+    
+
+def add_point(body, spreadsheetId):
     """
     Check student attendance in Student Scoring
     """
