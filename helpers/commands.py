@@ -11,7 +11,7 @@ import requests
 load_dotenv()
 STUDENT_SCORING = os.getenv('STUDENT_SCORING')
 BOT_NAME = os.getenv('BOT_NAME')
-=======
+
 import requests
 
 # Command: Show available commands
