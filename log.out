@@ -1,9 +1,1 @@
-Traceback (most recent call last):
-  File "./bot.py", line 8, in <module>
-    from helpers.commands import *
-  File "/home/minhanh_coderschool/discord-bot/helpers/commands.py", line 14
-    =======
-     ^
-SyntaxError: invalid syntax
- /var/mail/datetime
-./missing.py: 9: ./missing.py: Syntax error: "(" unexpected
+nohup: stdbuf: No such file or directory

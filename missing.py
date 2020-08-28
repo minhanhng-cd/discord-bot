@@ -29,7 +29,11 @@ def check_absence():
     return
 
 # Check absense every day at 18:00
-schedule.every().day.at("22:10").do(check_absence)
+schedule.every().monday.at("22:10").do(check_absence)
+schedule.every().tuesday.at("22:10").do(check_absence)
+schedule.every().wednesday.at("22:10").do(check_absence)
+schedule.every().thursday.at("22:10").do(check_absence)
+schedule.every().friday.at("22:10").do(check_absence)
 
 while True:
     schedule.run_pending()
