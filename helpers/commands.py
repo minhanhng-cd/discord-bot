@@ -4,7 +4,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from helpers import gsheet
 import numpy as np
-<<<<<<< HEAD
+
 import os
 import requests
 
@@ -12,36 +12,7 @@ load_dotenv()
 STUDENT_SCORING = os.getenv('STUDENT_SCORING')
 BOT_NAME = os.getenv('BOT_NAME')
 =======
-#import tensorflow as tf
 import requests
-
-# model = tf.keras.models.load_model('models/catdog.h5')
-
-# Preprocess an image
-#def preprocess_image(image):
- #   image = tf.image.decode_jpeg(image, channels=3)
-  #  image = tf.image.resize(image, [224, 224])
-   # image /= 255.0  # normalize to [0,1] range
-
-    #return image
-
-# Read the image from path and preprocess
-#def load_and_preprocess_image(path):
- #   image = tf.io.read_file(path)
-  #  return preprocess_image(image)
-
-# Predict & classify image
-#def classify(model, image_path):
-
- #   preprocessed_imgage = load_and_preprocess_image(image_path)
-  #  preprocessed_imgage = tf.reshape(preprocessed_imgage, (1,224 ,224 ,3))
-
-   # prob = model.predict(preprocessed_imgage)
-    #label = "Cat" if prob >= 0.5 else "Dog"
-    #classified_prob = prob if prob >= 0.5 else 1 - prob
-    
-   # return label, classified_prob
->>>>>>> 8de48cedf7d9a88f7c28d48d4e3141e38d45ecb1
 
 # Command: Show available commands
 def help(message, channel):
