@@ -4,4 +4,5 @@ discord-bot
 credentials.json
 test.py
 models/*
-attachment.jpg
+**/__*
+log.out

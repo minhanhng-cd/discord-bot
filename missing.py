@@ -9,6 +9,9 @@ load_dotenv()
 STUDENT_SCORING = os.getenv('STUDENT_SCORING')
 
 def check_absence():
+    """
+    Minus 5 points of missing students without permission
+    """
     today = datetime.strftime(datetime.now().date(), '%Y-%m-%d')
 
     # Get list of users and their Disord account
@@ -29,11 +32,11 @@ def check_absence():
     return
 
 # Check absense every day at 18:00
-schedule.every().monday.at("22:10").do(check_absence)
-schedule.every().tuesday.at("22:10").do(check_absence)
-schedule.every().wednesday.at("22:10").do(check_absence)
-schedule.every().thursday.at("22:10").do(check_absence)
-schedule.every().friday.at("22:10").do(check_absence)
+schedule.every().monday.at("18:00").do(check_absence)
+schedule.every().tuesday.at("18:00").do(check_absence)
+schedule.every().wednesday.at("18:00").do(check_absence)
+schedule.every().thursday.at("18:00").do(check_absence)
+schedule.every().friday.at("18:00").do(check_absence)
 
 while True:
     schedule.run_pending()
