@@ -54,6 +54,10 @@ def cheers(message, channel):
 # Command: Check-in
 def hello(message, channel):
 
+    # Check if it is weekend
+    if datetime.now().weekday() in [5,6]:
+        return {'content': f'There is no class today!'}
+
     today = datetime.strftime(datetime.now().date(), '%Y-%m-%d')
 
     try:
@@ -76,8 +80,18 @@ def hello(message, channel):
     if key in gsheet.get_keys(STUDENT_SCORING):
         return {'content': f'Student {message.author.name} has already checked-in today!'}
 
+    now = datetime.now().time()
+
+    late = datetime.strptime('10:15:00','%H:%M:%S').time()
+
+    # Give point if on-time. minus point if late
+    for now > late:
+        score = -2
+    else:
+        score = 1
+
     # Generate Attendance data row
-    body = {'values': [[today, user, 1, 'Attendance']]}
+    body = {'values': [[today, user, score, 'Attendance']]}
 
     # Append data row to Student Scoring file
     gsheet.add_point(body, STUDENT_SCORING)

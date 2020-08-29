@@ -40,6 +40,7 @@ def get_users(spreadsheetId, cohort=None):
         spreadsheetId = spreadsheetId,
         range = 'Look_Up!A3:E').execute()['values']
 
+    # Filter by cohort
     if cohort:
         return {i[3]: i[0] for i in data if (i[4] == 'Active') & (i[2] == cohort)}
     else:
