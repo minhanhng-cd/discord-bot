@@ -1,7 +1,0 @@
-from: can't read /var/mail/dotenv
-from: can't read /var/mail/helpers
-./missing.py: 3: ./missing.py: import: not found
-./missing.py: 4: ./missing.py: import: not found
-./missing.py: 5: ./missing.py: import: not found
-from: can't read /var/mail/datetime
-./missing.py: 9: ./missing.py: Syntax error: "(" unexpected
