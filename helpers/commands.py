@@ -85,7 +85,7 @@ def hello(message, channel):
     late = datetime.strptime('10:15:00','%H:%M:%S').time()
 
     # Give point if on-time. minus point if late
-    for now > late:
+    if  now > late:
         score = -2
     else:
         score = 1
