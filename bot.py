@@ -42,12 +42,13 @@ async def on_message(message):
 
         try:
             response = eval(command + '(message, channel)')
+            history = await message.channel.history(limit = 50).flatten()
+            await message.delete()
         except:
             response = None
 
-        history = await message.channel.history(limit = 50).flatten()
 
-        await message.delete()
+    
 
         if response == 'clear':
             for m in history:
